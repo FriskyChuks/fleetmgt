@@ -72,8 +72,8 @@ def book_a_ride_view(request):
             new_form.distance = distance
             new_form.rider_id = request.user.id
             if location:
-                # new_form.save()
-                # form = BookRideForm()
+                new_form.save()
+                form = BookRideForm()
                 msg = 'Your booking is Successful'
         
     m = m._repr_html_()
