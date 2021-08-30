@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponseRedirect
+from django.contrib.auth import authenticate, login, get_user_model, logout
+from django.urls import reverse
 
 # Create your views here.
 from django import template
@@ -18,13 +20,17 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.forms.utils import ErrorList
 from django.http import HttpResponse
+
+from cars.models import Car
+
 from .forms import LoginForm, SignUpForm
 
 
 def home_view(request):
+    cars = Car.objects.all()
 
     template = 'home.html'
-    context = {}
+    context = {"cars":cars}
     return render(request, template, context)
 
 
@@ -42,7 +48,7 @@ def login_view(request):
             
             if user is not None:
                 login(request, user)
-                return redirect("/home")
+                return redirect("/")
             else:    
                 msg = 'Invalid credentials'    
         else:
@@ -78,7 +84,7 @@ def register_user(request):
     return render(request, "users/register.html", {"form": form, "msg" : msg, "success" : success })
 
 
-def table(request):
-    template = "tables.html"
-    context = {}
-    return render(request, template, context)
+def logout_view(request):
+    logout(request)
+    # messages.success(request, "Sad to see you leave! See you soon please!")
+    return HttpResponseRedirect('%s'%(reverse("home")))

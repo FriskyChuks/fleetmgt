@@ -11,91 +11,87 @@
 </button> -->
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">
-          {% if not destination %} Unmapped Destination
-          {% else %}  Distance to {{destination}}
-          {% endif %}
-        </h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        {% if distance == 0.00 %} Your Destination could not be sited on the map, your distance shall be calculated with your driver, thanks!
-        {% else %} {{distance}}Km 
-        {% endif %}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-      </div>
-    </div>
-  </div>
-</div>
 
-<section>
-    <div class="page-header section-height-75">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4 d-flex flex-column">
-            <div class="card">
-              <div class="card-header pb-0 text-left bg-transparent">
-                <h6 style="color: green; "> 
-                    {{ msg }}
-                  </h6>
-                <h4 class="text-success text-gradient"> 
-                  Book a Ride
-                </h4>               
-              </div>
-              <div class="card-body">
-                <form role="form text-left" method="post" action="">{% csrf_token %}
-                  <!-- <label>Pickup Address</label>
-                  <div class="mb-3">
-                    {{ form.pickup_address }}
-                  </div> -->
-                  <label>Ride Class</label>
-                  <div class="mb-3">
-                    {{ form.service_class }}
-                  </div>
-                  <label>Destination</label>
-                  <div class="mb-3">
-                    {{ form.destination }}
-                  </div>
-                  <!-- <label>Estimated Distance (in Km)</label> -->
-                  <div class="mb-3" hidden>
-                    {{ form.distance }}
-                  </div>
-                  <br>
-                  <button class="text-success text-gradient font-weight-bold">Click to Book Now</button> 
-                  <br><br>
-                  This product includes GeoLite2 data created by MaxMind, available from
-                  <a href="https://www.maxmind.com">https://www.maxmind.com</a>.                 
-                </form>
-              </div>
-            </div>
+<div class="container">
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              {% if not destination %} Unmapped Destination
+              {% else %}  Distance to {{destination}}
+              {% endif %}
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          
-          <div class="col-md-8 d-flex flex-column">
-            <div class="card">
-              <div class="card-header pb-0 text-left bg-transparent">
-                <h4 class="text-success text-gradient"> 
-                  Current Location: {% if city.city %} 
-                  {{ city.city }} {{ city.country_name }} {% else %} {{ city.country_name }}
-                  {% endif %}
-                </h4>               
-              </div>
-              <div class="card-body">
-                {{ map|safe }}
-                <br>
-              </div>
-            </div>
+          <div class="modal-body">
+            {% if distance == 0.00 %} Your Destination could not be sited on the map, your distance shall be calculated with your driver, thanks!
+            {% else %} {{distance}}Km 
+            {% endif %}
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ok</button>
+            <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
           </div>
         </div>
       </div>
     </div>
-  </section>
+
+    <br>
+
+    <div class="row">
+      <div class="col-sm-12">  
+        <div class="card">
+          <div class="card-header">
+            <h5>Book a Ride here  || <small>kindly fill the form below </small></h5>
+          </div>
+          <!-- from here -->
+              <div class="card-body">
+                <div class="row g-2">
+                  <div class="col-md-4">
+                    <form role="form text-left" method="post" action="">{% csrf_token %}
+                      <h6 style="color: green; "> 
+                        {{ msg }}
+                      </h6>
+                      <label>Select Class</label>
+                      <div>
+                        {{ form.service_class }}
+                      </div>
+                      <br>
+                      <label>Destination</label>
+                      <div>
+                        {{ form.destination }}
+                      </div>
+                      <!-- <label>Estimated Distance (in Km)</label> -->
+                      <div>
+                        {{ form.distance }}
+                      </div>
+                      <br>
+                      <button class="text-success text-gradient font-weight-bold">Click to Book Now</button> 
+                      <br><br>
+                      This product includes GeoLite2 data created by MaxMind, available from
+                      <a href="https://www.maxmind.com">https://www.maxmind.com</a>.                 
+                    </form>
+                  </div>
+                  <div class="col-md-8">
+                    <h4 class="text-success text-gradient"> 
+                      Current Location: {% if city.city %} 
+                      {{ city.city }} {{ city.country_name }} {% else %} {{ city.country_name }}
+                      {% endif %}
+                    </h4>               
+                      {{ map|safe }}
+                  </div>
+                </div>
+              </div>
+  
+          <div class="card-header">  
+          </div>
+        </div>
+      </div>        
+    </div>
+
+</div>
+
 {% if request.POST and distance is not None %}
   <script>
     $(window).on('load', function(){

@@ -1,4 +1,6 @@
 from django import forms
+from collections import OrderedDict as SortedDict
+
 
 from .models import Ride
 
@@ -10,7 +12,7 @@ class BookRideForm(forms.ModelForm):
 		widgets = {
 		'pickup_address': forms.TextInput(attrs={'class': 'form-control'}),
 		'destination': forms.TextInput(attrs={'class': 'form-control'}),
-		'distance': forms.TextInput(attrs={'class': 'form-control'}),
+		'distance': forms.HiddenInput(attrs={'class': 'form-control'}),
 		'service_class': forms.Select(attrs={'class': 'form-control'}),			
         }
 
