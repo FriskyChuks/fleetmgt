@@ -39,56 +39,68 @@
 
     <br>
 
-    <div class="row">
-      <div class="col-sm-12">  
-        <div class="card">
-          <div class="card-header">
-            <h5>Book a Ride here  || <small>kindly fill the form below </small></h5>
-          </div>
           <!-- from here -->
               <div class="card-body">
                 <div class="row g-2">
-                  <div class="col-md-4">
-                    <form role="form text-left" method="post" action="">{% csrf_token %}
-                      <h6 style="color: green; "> 
-                        {{ msg }}
-                      </h6>
-                      <label>Select Class</label>
-                      <div>
-                        {{ form.service_class }}
+                  <div class="row">
+                    <div class="col-sm-12">  
+                      <div class="card">
+                        <div class="card-header">
+                          <h5>Book a Ride here  || <small>kindly fill the form below </small></h5>
+                        </div>
+                        <div class="col-md-4">
+                          <form role="form text-left" method="post" action="">{% csrf_token %}
+                            <h6 style="color: green; "> 
+                              {{ msg }}
+                            </h6>
+                            <label>Select Class</label>
+                            <div>
+                              {{ form.service_class }}
+                            </div>
+                            <br>
+                            <label>Destination</label>
+                            <div>
+                              {{ form.destination }}
+                            </div>
+                            <!-- <label>Estimated Distance (in Km)</label> -->
+                            <div>
+                              {{ form.distance }}
+                            </div>
+                            <br>
+                            <button class="text-success text-gradient font-weight-bold">Click to Book Now</button> 
+                            <br><br>
+                            This product includes GeoLite2 data created by MaxMind, available from
+                            <a href="https://www.maxmind.com">https://www.maxmind.com</a>.                 
+                          </form>
+                        </div>
+                      <div class="card-header">  
                       </div>
-                      <br>
-                      <label>Destination</label>
-                      <div>
-                        {{ form.destination }}
+                    </div>
+                  </div>        
+                </div>
+                <div class="row">
+                  <div class="col-sm-12">  
+                    <div class="card">
+                      <div class="card-header">
+                        <h5>Book a Ride here  || <small>kindly fill the form below </small></h5>
                       </div>
-                      <!-- <label>Estimated Distance (in Km)</label> -->
-                      <div>
-                        {{ form.distance }}
+                        <div class="col-md-8">
+                          <h4 class="text-success text-gradient"> 
+                            Current Location: {% if city.city %} 
+                            {{ city.city }} {{ city.country_name }} {% else %} {{ city.country_name }}
+                            {% endif %}
+                          </h4>               
+                            {{ map|safe }}
+                        </div>
+                      <div class="card-header">  
                       </div>
-                      <br>
-                      <button class="text-success text-gradient font-weight-bold">Click to Book Now</button> 
-                      <br><br>
-                      This product includes GeoLite2 data created by MaxMind, available from
-                      <a href="https://www.maxmind.com">https://www.maxmind.com</a>.                 
-                    </form>
-                  </div>
-                  <div class="col-md-8">
-                    <h4 class="text-success text-gradient"> 
-                      Current Location: {% if city.city %} 
-                      {{ city.city }} {{ city.country_name }} {% else %} {{ city.country_name }}
-                      {% endif %}
-                    </h4>               
-                      {{ map|safe }}
-                  </div>
+                    </div>
+                  </div>        
+                </div>
                 </div>
               </div>
   
-          <div class="card-header">  
-          </div>
-        </div>
-      </div>        
-    </div>
+        
 
 </div>
 
