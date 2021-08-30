@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect, redirect
 from django.contrib.auth import authenticate, login, get_user_model, logout
 from django.urls import reverse
 
@@ -48,7 +48,10 @@ def login_view(request):
             
             if user is not None:
                 login(request, user)
-                return redirect("/")
+                if "next" in request.POST:
+                    return redirect(request.POST.get('next'))
+                else:
+                    return redirect("/")
             else:    
                 msg = 'Invalid credentials'    
         else:

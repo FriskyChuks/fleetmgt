@@ -3,12 +3,14 @@ from django.shortcuts import render
 from geopy.geocoders import Nominatim
 from geopy.distance import geodesic
 import folium
+from django.contrib.auth.decorators import login_required
 
 from .models import Ride
 from .forms import BookRideForm
 from .utils import get_geo, get_center_coordinates, get_zoom, get_ip_address
 
 
+@login_required
 def book_a_ride_view(request):
     # Initialise variables
     distance = None
@@ -20,8 +22,8 @@ def book_a_ride_view(request):
     ip_ = get_ip_address(request)
     
     # ip = '72.14.207.99' # USA
-    ip = '23.248.172.255' # NIGERIA
-    country, city, lat, lon = get_geo(ip)
+    # ip = '23.248.172.255' # NIGERIA
+    country, city, lat, lon = get_geo(ip_)
     location = geolocator.geocode(city)
 
     # FOR CURRENT LOCATION COORDINATES
@@ -46,6 +48,14 @@ def book_a_ride_view(request):
         if not destination:
             # DISTANCE CALCULATION
             distance = 0.00
+            new_form.pickup_address = location
+            new_form.destination = form.cleaned_data.get('destination')
+            new_form.distance = distance
+            new_form.rider_id = request.user.id
+            if location:
+                new_form.save()
+                form = BookRideForm()
+                msg = 'Your booking is Successful'
         else:
             destination_lat = destination.latitude
             destination_lon = destination.longitude
