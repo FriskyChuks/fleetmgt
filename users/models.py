@@ -71,6 +71,7 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
+    foto			= models.ImageField(null=True, blank=True, upload_to="image/", default="image/male.jpg")
     email 			= models.EmailField(max_length=255, unique=True, blank=True, null=True)
     first_name		= models.CharField(max_length=225)
     last_name		= models.CharField(max_length=225)

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 # import geoip2.database
 from geopy.geocoders import Nominatim
 from geopy.distance import geodesic
@@ -22,8 +22,8 @@ def book_a_ride_view(request):
     ip_ = get_ip_address(request)
     
     # ip = '72.14.207.99' # USA
-    # ip = '23.248.172.255' # NIGERIA
-    country, city, lat, lon = get_geo(ip_)
+    ip = '23.248.172.255' # NIGERIA
+    country, city, lat, lon = get_geo(ip)
     location = geolocator.geocode(city)
 
     # FOR CURRENT LOCATION COORDINATES
@@ -52,10 +52,9 @@ def book_a_ride_view(request):
             new_form.destination = form.cleaned_data.get('destination')
             new_form.distance = distance
             new_form.rider_id = request.user.id
-            if location:
-                new_form.save()
-                form = BookRideForm()
-                msg = 'Your booking is Successful'
+            new_form.save()
+            form = BookRideForm()
+            msg = 'Your booking is Successful'
         else:
             destination_lat = destination.latitude
             destination_lon = destination.longitude
@@ -81,10 +80,10 @@ def book_a_ride_view(request):
             new_form.destination = destination
             new_form.distance = distance
             new_form.rider_id = request.user.id
-            if location:
-                new_form.save()
-                form = BookRideForm()
-                msg = 'Your booking is Successful'
+            new_form.save()
+            form = BookRideForm()
+            msg = 'Your booking is Successful'
+            # return redirect()
         
     m = m._repr_html_()
    
@@ -99,12 +98,14 @@ def book_a_ride_view(request):
     return render(request, template, context)
 
 
+
 def riders_list_view(request):
-    riders = Ride.objects.filter(status=1)
-    print(riders)
+    pending_riders = Ride.objects.filter(status=1)# Pending riders
+    active_riders = Ride.objects.filter(status=3)# Active Riders
+    # print(riders)
 
     template = 'riders/riders_list.html'
-    context = {"riders":riders}
+    context = {"pending_riders":pending_riders, "active_riders":active_riders}
     return render(request, template, context)
 
 

@@ -1,3 +1,4 @@
+
 {% load static %}
 <!doctype html>
 <html lang="en">
@@ -7,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.87.0">
-    <title>Signin Template · Bootstrap v5.1</title>
+    <title>Hadad Login Register</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sign-in/">
 
@@ -84,6 +85,9 @@
           <input type="hidden" name="next"  value="{{ request.GET.next }}">
         {% endif %}
         <button class="w-100 btn btn-lg btn-success" type="submit">Sign in</button>
+        <label>
+          Don't have an account? <a href="{% url 'register' %}">Register</a> with us
+        </label>
         <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
       </form>
     </main> 

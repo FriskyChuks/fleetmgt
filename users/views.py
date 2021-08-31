@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponseRedirect, redirect
 from django.contrib.auth import authenticate, login, get_user_model, logout
 from django.urls import reverse
+from django.contrib import messages
 
 # Create your views here.
 from django import template
@@ -74,10 +75,10 @@ def register_user(request):
             raw_password = form.cleaned_data.get("password1")
             user = authenticate(email=email, password=raw_password)
 
-            msg     = 'User created - please <a href="/">login</a>.'
+            msg     = 'User created successfully! - please <a href="/">login</a>.'
             success = True
             
-            #return redirect("/login/")
+            return redirect("/login/")
 
         else:
             msg = 'Form is not valid'    

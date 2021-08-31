@@ -1,119 +1,113 @@
-{% extends 'base.html' %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.87.0">
+    <title>Hadad Login Register</title>
 
-{% block content %}
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sign-in/">
 
-  <section>
-    <div class="page-header section-height-75">
-      <div class="container">
-        <div class="row">
-          <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
-            <div class="card card-plain mt-8">
-              <div class="card-header pb-0 text-left bg-transparent">
-                <h4 class="text-success text-gradient">
-                  HL - Register
-                </h4>
-                <p class="mb-0">
-                    {% if msg %}
-                        {{ msg | safe }}
-                    {% else %}
-                        Add your credentials
-                    {% endif %}                 
-                </p>
-              </div>
-              <div class="card-body">
-                <form role="form text-left" method="post" action="">
-                  
-                  {% csrf_token %}
+    
 
-                  <!-- <label>Username</label> -->
-                  <!-- <div class="mb-3">
-                    {{ form.username }}
-                  </div> -->
-                  <!-- <span class="text-error">{{ form.username.errors }}</span> -->
+    <!-- Bootstrap core CSS -->
+<link href="/docs/5.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 
-                  <label>Email</label>
-                  <div class="mb-3">
-                    {{ form.email }}
-                  </div>
-                  <span class="text-error">{{ form.email.errors }}</span>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+<link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-                  <label>Phone Number</label>
-                  <div class="mb-3">
-                    {{ form.phone1 }}
-                  </div>
-                  <span class="text-error">{{ form.phone1.errors }}</span>
 
-                  <label>Firstname</label>
-                  <div class="mb-3">
-                    {{ form.first_name }}
-                  </div>
-                  <span class="text-error">{{ form.first_name.errors }}</span>
 
-                  <label>Lastname</label>
-                  <div class="mb-3">
-                    {{ form.last_name }}
-                  </div>
-                  <span class="text-error">{{ form.last_name.errors }}</span>
+    <!-- Favicons -->
+<link rel="apple-touch-icon" href="/docs/5.1/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+<link rel="icon" href="/docs/5.1/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/docs/5.1/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="manifest" href="/docs/5.1/assets/img/favicons/manifest.json">
+<link rel="mask-icon" href="/docs/5.1/assets/img/favicons/safari-pinned-tab.svg" color="#7952b3">
+<link rel="icon" href="/docs/5.1/assets/img/favicons/favicon.ico">
+<meta name="theme-color" content="#7952b3">
 
-                  <label>Othernames</label>
-                  <div class="mb-3">
-                    {{ form.other_names }}
-                  </div>
-                  <span class="text-error">{{ form.other_names.errors }}</span>
-                  
-                  <label>Password</label>
-                  <div class="mb-3">
-                    {{ form.password1 }}
-                  </div>
-                  <span class="text-error">{{ form.password1.errors }}</span>
 
-                  <label>Password Check</label>
-                  <div class="mb-3">
-                    {{ form.password2 }}
-                  </div>
-                  <span class="text-error">{{ form.password2.errors }}</span>
-
-                  <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="rememberMe" checked="">
-                    <label class="form-check-label" for="rememberMe">Terms</label>
-                  </div>
-                  <div class="text-center">
-                    <button type="submit" name="register" class="btn bg-gradient-success w-100 mt-4 mb-0">Sign UP</button>
-                  </div>
-                </form>
-              </div>
-              <div class="card-footer text-center pt-0 px-lg-2 px-1">
-                <p class="mb-4 text-sm mx-auto">
-                  Already have an account?
-                  <a href="{% url 'login' %}" 
-                     class="text-info text-gradient font-weight-bold">Sign IN</a>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="oblique position-absolute top-0 h-100 d-md-block d-none me-n8">
-              <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" style="background-image:url('/static/assets/img/cars/1.jpg')"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-{% endblock content %}
-
-<!-- Specific JS goes HERE --> 
-{% block javascripts %}
-
-  <script>
-    var win = navigator.platform.indexOf('Win') > -1;
-    if (win && document.querySelector('#sidenav-scrollbar')) {
-      var options = {
-        damping: '0.5'
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
       }
-      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-    }
-  </script>
 
-{% endblock javascripts %}
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+    
+    <!-- Custom styles for this template -->
+    {% include 'base_files/signin.html' %}
+    <!-- <link href=".base_files/signin.html" rel="stylesheet"> -->
+  </head>
+  <body class="text-center">
+    <main class="form-signin">
+      <p class="mb-0">
+        {% if msg %}
+            <h6 style="color: red;">{{ msg | safe }}</h6>
+        {% endif %}                  
+      </p>
+      <form method="POST" action=""> {% csrf_token %}
+        <!-- <img class="mb-4" src="/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
+        <h1 style="color: green;">HL Register</h1><br>
+
+        <div class="form-floating">
+          {{ form.email }}
+          <label for="floatingInput">Email address</label>
+        </div>
+        <div class="form-floating">
+          {{ form.phone1 }}
+          <label for="floatingInput">Phone number</label>
+        </div>
+        <div class="form-floating">
+          {{ form.first_name }}
+          <label for="floatingInput">First name</label>
+        </div>
+        <div class="form-floating">
+          {{ form.last_name }}
+          <label for="floatingInput">Last name</label>
+        </div>
+        <div class="form-floating">
+          {{ form.other_names }}
+          <label for="floatingInput">Other names</label>
+        </div>
+        <div class="form-floating">
+          {{ form.password1 }}
+          <label for="floatingPassword">Password</label>
+        </div>
+        <div class="form-floating">
+          {{ form.password2 }}
+          <label for="floatingPassword">Confirm Password</label>
+        </div>
+        {% if request.GET.next %}
+          <input type="hidden" name="next"  value="{{ request.GET.next }}">
+        {% endif %}
+        <button class="w-100 btn btn-lg btn-success" type="submit">Register with Us</button>
+        <label>
+          Already Registered? <a href="{% url 'login' %}">Sign in</a>
+        </label>
+        <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
+      </form>
+    </main> 
+  </body>
+</html>
+
+
+
+
+
+
+
+

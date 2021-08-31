@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-x++#1w8ig3j=2%2^f+q_$_b1*t)(^n0(#vh$$$$=##=*z&aajj
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['hadadlogistics.herokuapp.com', '127.0.0.1']
 
 AUTH_USER_MODEL = 'users.User'
 
@@ -60,6 +60,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True     # opional, as this will log you out when browser is closed
+SESSION_COOKIE_AGE = 900                   # 0r 5 * 60, same thing
+SESSION_SAVE_EVERY_REQUEST = True          # Will prrevent from logging you out after 300 seconds
+
 
 ROOT_URLCONF = 'fleetmgt.urls'
 LOGOUT_REDIRECT_URL = '/login/'
