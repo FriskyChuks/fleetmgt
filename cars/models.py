@@ -58,6 +58,11 @@ MARITAL_STATUS = (
 		('divorced', 'Divorced'),
 	)
 
+ACCOUNT_TYPE = (
+	('1', 'Current'),
+	('2', 'Savings'),
+)
+
 
 
 class RideServiceClass(models.Model):
@@ -90,7 +95,6 @@ class Car(models.Model):
     active = models.BooleanField(default=True)
     date_created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
-    # updated_by = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
@@ -98,7 +102,7 @@ class Car(models.Model):
 
 
 class CarOwnerDriverRegister(models.Model):
-    user            = models.OneToOneField(User, related_name='driver', on_delete=models.CASCADE, blank=True, null=True)
+    user            = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
     image           = models.ImageField(default='car.png', blank=True)
     date_of_birth   = models.DateField()
     marital_status  = models.CharField(max_length=10, choices=MARITAL_STATUS)
@@ -122,4 +126,16 @@ class CarOwnerDriverRegister(models.Model):
         return f"{self.user.first_name} {self.user.last_name} || {self.user.phone1}"
 
 
+class BankAccountInformation(models.Model):
+	user            = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
+	account_name	= models.CharField(max_length=100)
+	account_type	= models.CharField(max_length=20, choices=ACCOUNT_TYPE)
+	bank_name		= models.CharField(max_length=50)
+	account_number	= models.CharField(max_length=10)
+	date_created    = models.DateTimeField(auto_now_add=True, auto_now=False)
+	active = models.BooleanField(default=True)
+	date_created = models.DateTimeField(auto_now_add=True, auto_now=False)
+	updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 
+	def __str__(self):
+		return f"{self.account_name} || {self.account_number}|| {self.bank_name}"

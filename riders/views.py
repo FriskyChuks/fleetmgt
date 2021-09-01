@@ -22,7 +22,7 @@ def book_a_ride_view(request):
     ip_ = get_ip_address(request)
     
     # ip = '72.14.207.99' # USA
-    ip = '23.248.172.255' # NIGERIA
+    # ip = '23.248.172.255' # NIGERIA
     country, city, lat, lon = get_geo(ip_)
     location = geolocator.geocode(city)
 
